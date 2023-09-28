@@ -1,22 +1,28 @@
 // daisyUI Hero with form
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from "../../firebase/firebase.config";
+import { useState } from "react";
 
 const HeroRegister = () => {
+  const auth = getAuth(app);
+  const [regError, setRegError] = useState("");
+
   const handleRegister = (e) => {
     e.preventDefault();
-    // console.log("handleBtn works");
+    // console.log("handle button works");
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
-    
+    // console.log(email, password);
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result.user);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
+        setRegError(error.message);
       });
+      setRegError('')
   };
 
   return (
@@ -65,6 +71,9 @@ const HeroRegister = () => {
                   <button className="btn btn-primary">Submit</button>
                 </div>
               </form>
+              {regError && (
+                <p className="text-sm text-red-600 mt-2">Error: {regError}</p>
+              )}
             </div>
           </div>
         </div>
@@ -74,4 +83,3 @@ const HeroRegister = () => {
 };
 
 export default HeroRegister;
-const auth = getAuth(app);
