@@ -1,9 +1,8 @@
 
-
 const Register = () => {
     return (
         <div>
-          this is register  
+            this is register
         </div>
     );
 };
