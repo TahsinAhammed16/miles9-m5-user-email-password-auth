@@ -102,7 +102,7 @@ const HeroRegister = () => {
                   <div className="flex gap-1 items-center">
                     <input className="" type="checkbox" name="checkbox" id="" />
                     <label htmlFor="checkbox">
-                      <a href="">Accept our terms & conditions.</a>
+                      <a href="" className="underline">Accept our terms & conditions.</a>
                     </label>
                   </div>
                   <br />
@@ -128,6 +128,7 @@ const HeroRegister = () => {
                   Success: {regSuccess}
                 </p>
               )}
+
             </div>
           </div>
         </div>
