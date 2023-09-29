@@ -13,11 +13,19 @@ const HeroRegister = () => {
     // console.log("handle button works");
     const email = e.target.email.value;
     const password = e.target.password.value;
-    // console.log(email, password);
+    console.log(email, password);
 
     // clint site validation without sending to firebase
     if (password.length < 6) {
-      setRegError("Your Password is weak");
+      setRegError(
+        "Your Password is weak! Should be at least 6 characters or longer"
+      );
+      return;
+
+    } else if (!/[A-Z]/.test(password)) {
+      setRegError(
+        "Your password should have at least one upper case characters."
+      );
       return;
     }
 
