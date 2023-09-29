@@ -2,6 +2,7 @@
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from "../../firebase/firebase.config";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const HeroRegister = () => {
@@ -102,7 +103,9 @@ const HeroRegister = () => {
                   <div className="flex gap-1 items-center">
                     <input className="" type="checkbox" name="checkbox" id="" />
                     <label htmlFor="checkbox">
-                      <a href="" className="underline">Accept our terms & conditions.</a>
+                      <a href="" className="underline">
+                        Accept our terms & conditions.
+                      </a>
                     </label>
                   </div>
                   <br />
@@ -128,7 +131,9 @@ const HeroRegister = () => {
                   Success: {regSuccess}
                 </p>
               )}
-
+              <p>
+                Already have an account? Please <Link to="/login" className="underline font-bold">Login</Link>.
+              </p>
             </div>
           </div>
         </div>
