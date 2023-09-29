@@ -18,6 +18,11 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result.user);
+        if (result.user.emailVerified) {
+          alert("User Logged in Successfully.");
+        } else {
+          alert("Please verify your email address.");
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -36,7 +41,7 @@ const Login = () => {
       return;
     }
 
-    // send validation email
+    // sent password reset email
     sendPasswordResetEmail(auth, email)
       .then(() => {
         alert("Password reset email sent!");

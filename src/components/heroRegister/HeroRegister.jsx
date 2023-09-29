@@ -32,7 +32,7 @@ const HeroRegister = () => {
       );
       return;
     } else if (!accept) {
-      setRegError("Pleace accept our terms & conditions.");
+      setRegError("Please accept our terms & conditions.");
       return;
     }
 
