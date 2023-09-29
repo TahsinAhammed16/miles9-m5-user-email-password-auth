@@ -15,7 +15,8 @@ const HeroRegister = () => {
     // console.log("handle button works");
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    const accept = e.target.checkbox.checked;
+    console.log(email, password, accept);
 
     // clint site validation without sending to firebase
     if (password.length < 6) {
@@ -27,6 +28,9 @@ const HeroRegister = () => {
       setRegError(
         "Your password should have at least one upper case characters."
       );
+      return;
+    } else if (!accept) {
+      setRegError("Pleace accept our terms & conditions.");
       return;
     }
 
@@ -77,6 +81,7 @@ const HeroRegister = () => {
                     <span className="label-text">Password</span>
                   </label>
 
+                  {/* password eye  */}
                   <div className="relative">
                     <input
                       type={showPass ? "text" : "password"}
@@ -91,6 +96,16 @@ const HeroRegister = () => {
                       {showPass ? <AiOutlineEye /> : <AiFillEyeInvisible />}
                     </div>
                   </div>
+
+                  {/* terms and conditions checkbox  */}
+                  <br />
+                  <div className="flex gap-1 items-center">
+                    <input className="" type="checkbox" name="checkbox" id="" />
+                    <label htmlFor="checkbox">
+                      <a href="">Accept our terms & conditions.</a>
+                    </label>
+                  </div>
+                  <br />
 
                   <label className="label">
                     <a href="#" className="label-text-alt link link-hover">
