@@ -2,11 +2,13 @@
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from "../../firebase/firebase.config";
 import { useState } from "react";
+import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const HeroRegister = () => {
   const auth = getAuth(app);
   const [regError, setRegError] = useState("");
   const [regSuccess, setRegSuccess] = useState("");
+  const [showPass, setShowPass] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -21,7 +23,6 @@ const HeroRegister = () => {
         "Your Password is weak! Should be at least 6 characters or longer"
       );
       return;
-
     } else if (!/[A-Z]/.test(password)) {
       setRegError(
         "Your password should have at least one upper case characters."
@@ -75,12 +76,22 @@ const HeroRegister = () => {
                   <label className="label">
                     <span className="label-text">Password</span>
                   </label>
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="password"
-                    className="input input-bordered"
-                  />
+
+                  <div className="relative">
+                    <input
+                      type={showPass ? "text" : "password"}
+                      name="password"
+                      placeholder="Password"
+                      className="input input-bordered w-full"
+                    />
+                    <div
+                      onClick={() => setShowPass(!showPass)}
+                      className="absolute top-4 right-4 text-lg cursor-pointer"
+                    >
+                      {showPass ? <AiOutlineEye /> : <AiFillEyeInvisible />}
+                    </div>
+                  </div>
+
                   <label className="label">
                     <a href="#" className="label-text-alt link link-hover">
                       Forgot password?
