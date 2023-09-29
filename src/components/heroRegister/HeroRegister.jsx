@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
 import { sendEmailVerification } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 
 const HeroRegister = () => {
   const auth = getAuth(app);
@@ -46,6 +47,14 @@ const HeroRegister = () => {
         console.log(result.user);
         setRegSuccess("Your account has been created");
 
+        // update profile
+        updateProfile(result.user, {
+          displayName: name,
+          photoURL: "https://example.com/jane-q-user/profile.jpg",
+        })
+          .then(() => console.log("profile updated"))
+          .catch();
+
         // send verification email
         sendEmailVerification(auth.currentUser)
           .then(() => {
@@ -76,6 +85,17 @@ const HeroRegister = () => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
               <form onSubmit={handleRegister}>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="name"
+                    className="input input-bordered"
+                  />
+                </div>
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Email</span>
