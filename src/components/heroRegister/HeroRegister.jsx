@@ -15,6 +15,17 @@ const HeroRegister = () => {
     const password = e.target.password.value;
     // console.log(email, password);
 
+    // clint site validation without sending to firebase
+    if (password.length < 6) {
+      setRegError("Your Password is weak");
+      return;
+    }
+
+    // reset error & success
+    setRegError("");
+    setRegSuccess("");
+
+    // create user
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result.user);
@@ -24,9 +35,6 @@ const HeroRegister = () => {
         console.error(error);
         setRegError(error.message);
       });
-
-    setRegError("");
-    setRegSuccess("");
   };
 
   return (
@@ -86,7 +94,6 @@ const HeroRegister = () => {
                   Success: {regSuccess}
                 </p>
               )}
-              
             </div>
           </div>
         </div>
