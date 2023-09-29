@@ -4,6 +4,7 @@ import app from "../../firebase/firebase.config";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiFillEyeInvisible } from "react-icons/ai";
+import { sendEmailVerification } from "firebase/auth";
 
 const HeroRegister = () => {
   const auth = getAuth(app);
@@ -44,6 +45,15 @@ const HeroRegister = () => {
       .then((result) => {
         console.log(result.user);
         setRegSuccess("Your account has been created");
+
+        // send verification email
+        sendEmailVerification(auth.currentUser)
+          .then(() => {
+            alert("Email verification sent!");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.error(error);
@@ -132,7 +142,11 @@ const HeroRegister = () => {
                 </p>
               )}
               <p>
-                Already have an account? Please <Link to="/login" className="underline font-bold">Login</Link>.
+                Already have an account? Please{" "}
+                <Link to="/login" className="underline font-bold">
+                  Login
+                </Link>
+                .
               </p>
             </div>
           </div>
