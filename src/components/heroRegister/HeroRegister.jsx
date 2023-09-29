@@ -6,6 +6,7 @@ import { useState } from "react";
 const HeroRegister = () => {
   const auth = getAuth(app);
   const [regError, setRegError] = useState("");
+  const [regSuccess, setRegSuccess] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -17,12 +18,15 @@ const HeroRegister = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result.user);
+        setRegSuccess("Your account has been created");
       })
       .catch((error) => {
         console.error(error);
         setRegError(error.message);
       });
-      setRegError('')
+
+    setRegError("");
+    setRegSuccess("");
   };
 
   return (
@@ -71,9 +75,18 @@ const HeroRegister = () => {
                   <button className="btn btn-primary">Submit</button>
                 </div>
               </form>
+
               {regError && (
-                <p className="text-sm text-red-600 mt-2">Error: {regError}</p>
+                <p className="text-sm text-red-600 mt-2 mx-auto">
+                  Error: {regError}
+                </p>
               )}
+              {regSuccess && (
+                <p className="text-sm text-green-600 mt-2 mx-auto">
+                  Success: {regSuccess}
+                </p>
+              )}
+              
             </div>
           </div>
         </div>
